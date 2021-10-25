@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="Images/favicon.ico"><title>Learn Git</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7246997f-1de8-43f6-8202-4f88928827f9" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🗃️</span></div><h1 class="page-title">Learn Git</h1></header><div class="page-body"><p id="5aea1e84-4d3a-48f1-9278-b9ba60662516" class=""><code>Made by</code><a href="https://nima-jamalian.github.io/CV/"><code>Nima Jamalian</code></a></p><h2 id="ddaad9ff-c535-4f1d-8ac8-d51776c8bbc2" class="">Table of Contents</h2><ul id="d9acb177-699f-4c8e-8101-f8912ced4367" class="toggle"><li><details open=""><summary></summary><nav id="2c408e2e-9948-4bcf-b44d-30181196d1fd" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ddaad9ff-c535-4f1d-8ac8-d51776c8bbc2">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6900ce30-8ba9-4fa9-9938-835012e4fd55">How Git Works?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#01ce8fb9-97dd-4f8d-9e09-22279749a89e">Git Cheat sheet</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#736eb9d3-2716-4570-ba26-3b663fbd8d65">Initialize Git Repository</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d9fb1da1-e9a7-4355-855c-e058b2750bd6">Checking What Is Inside a Repository</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f8e000b7-8121-4dd5-9276-d7a37ca4b432">Checking What&#x27;s Is In Your Staging Area</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d2117547-2a5f-4e2a-bdfa-b40b09e4c9e2">Adding Files To Git Staging Area</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bdc0d201-08e5-490a-b1fc-6c21150c9fa7">Removing Files From Staging Area</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c19068a3-e6de-4aed-9940-74ae39dae36c">How To Commit Files</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1eae0e2-69bb-4ec8-95fd-99289e23657f">Checking Commit History</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#756ec718-a079-4c92-9f5d-142c9fdc8f0d">Checking Difference</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8c439660-6a78-4625-b4fd-2687169f6d27">Going Back To The Previous Version </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f8812ca0-0d58-4396-9c90-44bdf09c20f7">Remote Repository</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#766e8afd-80d3-4134-8014-86e1db462199">Push To Remote Repository </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c22d7e3e-7e6f-4b77-9f31-29691fce730a">Git Ignore</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f3412b52-4b8a-4740-9d54-eda9246e9bdd">Cloning</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e76d12d1-2533-4402-a5b2-a21fa0d6b8e8">Branching And Merging</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5fbbd059-646e-443d-b9c1-3e4937214dad">Creating New Branch</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e41fbad8-1be9-4207-a5d1-62cc18badb61">Check The Branches In Git Repository </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#983685f8-eb08-4719-9e8f-2c5504e23ab9">Switch Branches</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dba24caf-b694-471f-ae56-f4c15c12c160">Merge Branches</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#363572b6-b93b-4d42-9c97-bab367d92839">Interactive Website To Learn Git Branching</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#61ec6c94-1c80-4dbe-8aaa-8bee082ce68c">Forking And Pull Requests</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c5ff4a73-6698-454f-aeec-f8a59a4e0729">Git Cheat Sheet </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#02b28f35-a455-4725-919f-0a2ab78492a1">Command Line Cheat Sheet</a></div></nav></details></li></ul><h1 id="6900ce30-8ba9-4fa9-9938-835012e4fd55" class="">How Git Works?</h1><h2 id="01ce8fb9-97dd-4f8d-9e09-22279749a89e" class="">Git Cheat sheet</h2><figure id="d3e41d37-4866-4b86-ae6b-ce8685252048" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Git_Digram.drawio_(1).png"><img style="width:813px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Git_Digram.drawio_(1).png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="159d952a-3ad7-4e3e-8ee8-99b82c3b251f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Working Directory → is the directory that we initialize git inside of it.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0740d5bd-8b17-4819-a415-c98b816a6fe9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Staging Area → Staging area is intermediate section between working directory and local repository. The reason staging area exist is because sometime we don&#x27;t want to add all of our files to be tracked or committed so the staging area is good place to figure out what are the things we want git to follow and what are the things we want git to ignore.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="32701f55-7c46-4ae6-a7a5-c651f7c4fffd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Local Repository → Once we add our tracked files to local repository using git commit command we get the commit id. We can also use the git checkout to go back to last position in out git repository in case it was need. For example if we messed up the code and needed to go back to the previous working version.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fd173a4c-fd26-464a-ba54-d88b438e0b66"><div style="font-size:1.5em"><span class="icon">📚</span></div><div style="width:100%">No worries about the rest of the commands, everything will be explained. Try to come back and look at the <code>git</code> cheat sheet diagram above while you are reading the notes, it will help you to visualize all the git commands and improve your learning.</div></figure><p id="4ed931e0-d151-4ef2-920d-fd2c99348535" class="">In this guide I will be using command line and GitHub website.</p><p id="13b84f23-4b76-49d3-a959-0a3e22c4d6d5" class="">If you are on Mac you can use terminal.</p><p id="5859bc91-2129-4a90-a601-a8ba9cc09daa" class="">If you are Windows, download git bash and run the the command in Git Bash application.</p><figure id="df14a03a-c9b8-4ce4-9c59-fd66bf904cad"><a href="https://gitforwindows.org/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Git for Windows</div><div class="bookmark-description">Git for Windows focuses on offering a lightweight, native set of tools that bring the full feature set of the Git SCM to Windows while providing appropriate user interfaces for experienced Git users and novices alike. Git for Windows provides a BASH emulation used to run Git from the command line.</div></div><div class="bookmark-href">https://gitforwindows.org/</div></div><img src="https://gitforwindows.org/img/gwindows_logo.png" class="bookmark-image"/></a></figure><h2 id="736eb9d3-2716-4570-ba26-3b663fbd8d65" class="">Initialize Git Repository</h2><p id="93c55606-2b53-4341-867d-26d3b496e4b8" class="">In order to initialize a git repository first you need to navigate to the repository you want to initialize as git repository. Run the commands bellow in your command line app.</p><pre id="3d1a56b0-e746-423a-82d1-0d18c4146ca2" class="code"><code>cd yourFileLocation</code></pre><p id="38ae3668-d82c-44b7-a1db-1bc9aadfdd84" class="">Once you are there run the commend bellow. This command initializes git in our directory.</p><pre id="45a4951f-baa0-4e65-89eb-a1d283b53c74" class="code"><code>git init</code></pre><p id="51748610-a4cc-4e7d-92ac-389e09653767" class="">For navigating through file in git you can use</p><pre id="460b352a-688f-4e45-a037-e51033abdef4" class="code"><code>cd fileDirection</code></pre><p id="10aa1142-4663-4100-bc91-1b462e0ddad8" class="">if you want to go back one step in directory you use command bellow.</p><pre id="15295e4f-f4d3-4aa1-bc78-b1f9847b2cdb" class="code"><code>cd ..</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="84fc365e-06ea-4a80-b02a-3a5b01debd50"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">If you press tab button while using git, the programme will try to auto complete the text for you which is very helpful. </div></figure><h2 id="d9fb1da1-e9a7-4355-855c-e058b2750bd6" class="">Checking What Is Inside a Repository</h2><p id="832ac8b2-2fc7-421f-97b2-9cd6a00c9f87" class="">In order to view the files inside the repository, once you are there you can run the command bellow. </p><pre id="8c7f50f3-85d9-4d67-bb0b-873b5f8ef287" class="code"><code>ls</code></pre><h2 id="f8e000b7-8121-4dd5-9276-d7a37ca4b432" class="">Checking What&#x27;s Is In Your Staging Area</h2><p id="9a4e33bb-130f-4954-bbb4-f396fbcfc6db" class="">In order to check what is in your git staging area which is the area in the middle of git. You use the command bellow</p><pre id="d568d9a9-71e5-4d80-a47c-b5eb9a9c81dc" class="code"><code>git status </code></pre><p id="9a601e5c-b911-4622-8ff1-aee3c88f3d71" class="">If you have untracked file this command will highlight them for you. Untracked files are the files that are in your working directory but they are not yet in the staging area and git repository. </p><p id="f5f55189-b921-4f8c-8c33-ea69e33e481b" class="">It also shows the files that are you already have in your git repository but have been modified.</p><h2 id="d2117547-2a5f-4e2a-bdfa-b40b09e4c9e2" class="">Adding Files To Git Staging Area</h2><p id="c32f64b5-e96e-4e2e-89b2-521ad5c3d42a" class="">You can use the command bellow </p><pre id="224b1f34-e1b3-4d67-9a5f-6aae30553c26" class="code"><code>git add fileName</code></pre><p id="75740ba3-708c-426f-b458-af4bc5da6d14" class="">Or if you want to add all of the files you can do. It&#x27;s very common to use this command instead of adding all the files one by one.</p><pre id="29a52fe3-72f6-4c54-9a96-2f0e1f861be5" class="code"><code>git add .</code></pre><h2 id="bdc0d201-08e5-490a-b1fc-6c21150c9fa7" class="">Removing Files From Staging Area</h2><p id="e00c1d52-4366-4557-8c5a-1d371973f92c" class="">Sometimes you might make a mistake and add a file which you don&#x27;t want to track to staging area.</p><p id="83dc1872-357c-46b6-8a0b-347491797834" class="">In order to reverse that you can use the command bellow.</p><p id="198a7c10-16fa-45aa-8c5a-de2c8a7d1965" class="">If you want to go to previous state, meaning you keep all of tracked files that you had before only removed what you added previously from staging area.</p><pre id="4b5d00bb-b9a7-4089-a4c6-6bc6bd4d632b" class="code"><code>git reset</code></pre><p id="28af8b40-87ac-493f-ba2b-df507a6f1d84" class="">if you want to remove everything from staging area, this includes files that you have added in previous commits you can use command bellow.</p><pre id="dee92f34-b7ce-42e3-8078-a2e92f1a068f" class="code"><code>git rm --cached -r .</code></pre><p id="4d3b48e0-f81c-4d35-9cd9-139c9e377958" class="">if you want to remove a specific file from staging area this includes files that you have added in previous commits you can use command bellow.</p><pre id="f189107a-698b-4bfd-ad8c-a152e24890de" class="code"><code>git rm --cached -r fileName</code></pre><h2 id="c19068a3-e6de-4aed-9940-74ae39dae36c" class="">How To Commit Files</h2><p id="7f352575-00e1-467c-9221-2ce15f7e22cb" class="">Commit mean we are moving our files from staging area to the version control. </p><pre id="1c9d0622-268a-4a66-84a9-7d171090d37b" class="code"><code>git commit -m &quot;Your Message&quot;</code></pre><p id="e6955c35-b394-48b4-a939-51bc73862327" class="">-m means you want to add a message to commit, so later if you go back to your commit history you easily identify what you did in that commit.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0e405928-6de9-4a59-adc8-37c04d6ca0a3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Commit message should be written in present tense. Also it&#x27;s important to for commit message to be meaningful avoid comments like &quot;change something&quot; or &quot;fix bug&quot; they are not clear.
+
+Example let say I fix a bug in my game that was caused by start button.
+My commit message should be → fix start game bug </div></figure><h2 id="b1eae0e2-69bb-4ec8-95fd-99289e23657f" class="">Checking Commit History</h2><p id="2e4432bd-78c0-4991-a034-be19057883fa" class="">In order to check the history of your commit you can use the command bellow</p><pre id="559f0d83-0ef0-43d3-b678-505cb0f0d287" class="code"><code>git log</code></pre><p id="cf1a47a2-0c60-49e3-905f-a2c967b247da" class="">Example of git log</p><figure id="f6d865eb-6ede-49b2-a9e4-31e77821b2d8" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled.png"><img style="width:739px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled.png"/></a></figure><p id="d10b7f02-5fa4-494d-9c04-f2ffc29e95a6" class="">Each commit also has a hash, which a unique identifier for each commit.
+You can also view who made the commit and the date and time and also the commit message.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5b1f8c97-4f38-46ed-a193-19f538c2c422"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">HEAD → represent the head or the current position that we are in.
+master → represent the branch that we are in. We will discuss branch later in this tutorial</div></figure><h2 id="756ec718-a079-4c92-9f5d-142c9fdc8f0d" class="">Checking Difference</h2><p id="9300caed-4ceb-46a6-a961-48dbb3a9c5bf" class="">Sometimes you may want to check the different between the file in your working directory and repository. In order to that you can use the command bellow.</p><pre id="f82a5c86-b313-4a4b-8c97-fff0c036c405" class="code"><code>git diff</code></pre><p id="f6a8db5f-82f1-4a3a-8c7c-1d72d460cadd" class="">This will show all the files that have been changed.</p><p id="36d021a5-9ad8-4ee3-b764-87094baf8696" class="">If you want to check the difference for a specific file you can use the same command as before but this time specify the file that you are looking for.</p><h2 id="8c439660-6a78-4625-b4fd-2687169f6d27" class="">Going Back To The Previous Version </h2><p id="fa384dc8-96d7-44c2-b169-22b93193fbd2" class="">Let&#x27;s say you have messed up your file and now you want to go back the previous version in your repository you can use the command</p><pre id="aec45a53-edca-4fe4-9915-0dc96d90aecf" class="code"><code>git checkout filename</code></pre><h1 id="f8812ca0-0d58-4396-9c90-44bdf09c20f7" class="">Remote Repository</h1><p id="99cc9cf8-84de-46da-8a64-d90a52463119" class="">You can also create remote repository, which is repository that is hosted on a server or on another computer. The best and most popular git platform is GitHub and it&#x27;s also free! </p><p id="e0953055-3929-48c7-baf2-3e2b55b8cd98" class="">You need to create account if you want to use GitHub, use the link below.</p><figure id="81680604-c377-4d20-99e9-770bd3a573f7"><a href="https://github.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">GitHub: Where the world builds software</div><div class="bookmark-description">GitHub is where over 65 million developers shape the future of software, together. Contribute to the open source community, manage your Git repositories, review code like a pro, track bugs and features, power your CI/CD and DevOps workflows, and secure code before you commit it.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/</div></div><img src="https://github.githubassets.com/images/modules/site/social-cards/github-social.png" class="bookmark-image"/></a></figure><p id="537fa1f0-842a-4367-aeba-696a5fc42ea0" class="">You can create a new repository on GitHub website and GitHub would give the credentials so you can push your files or local repository to the GitHub remote repository.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3f1b9535-9916-40be-8870-f1079c9c639f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">You can chose weather the remote repository is public or private. Public means anyone can access your files and view it. Remote mean only you and people who you have given access to the repository can view it.</div></figure><figure id="7c75f5fe-e60e-4b79-9147-70b8c255c807" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%201.png"><img style="width:1794px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%201.png"/></a></figure><p id="9de2e523-a62c-46cc-a93e-8a65d0620524" class="">In order to setup a remote repository using GitHub they are two methods you can use the application or the command line. Using command line is highly recommended while working with git as it has more functionality. The GitHub application is useful when you have multiple git repository, the app helps you find them easily and you can push your changes.</p><p id="4daee9ae-81c1-4a3f-a020-263451a3bb13" class="">
+</p><p id="1c937a46-ae3c-4a2c-891b-a78523915742" class="">In order to setup our remote repository and connect it to our local repository.</p><p id="a1843a4a-76aa-4f91-82d6-98e28df6ae91" class="">We add a remote git to our local git and give it the address of our remote repository, which was provided to use in the GitHub website after we created the remote repository. (HTTPS address)</p><pre id="b109bc25-d2e8-4d73-b12b-b323224046e4" class="code"><code>git remote add origin yourRemoteGitRepoAdressd</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="215f5307-9d7c-48af-bdbf-63e4e3f994db"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">origin → it&#x27;s just a name for our remote we can change it to anything we want. However it is highly recommend to keep it as origin since it has become the standard and most programmer are familiar with it.</div></figure><p id="f358cd7f-2808-4270-9e19-e0594960515e" class="">Once you execute the command above, the remote gets created.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ea2c5dec-7ac6-437f-9fb0-9e41cb9cb95c"><div style="font-size:1.5em"><span class="icon">🗒️</span></div><div style="width:100%">GitHub has started naming the default branch <code>main</code> instead of <code>master</code> to migrate away from biased terminology <a href="https://github.com/github/renaming"><strong>(more details available here)</strong></a>.</div></figure><h2 id="766e8afd-80d3-4134-8014-86e1db462199" class="">Push To Remote Repository </h2><p id="1542a5a6-391c-4a31-8537-6f1e3361fd35" class="">Now we can use the <code>git push</code> to push our local git to remote git repository using the command bellow.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="622bed68-a06c-479b-9893-f1a343acf284"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">-u → U flag or u option which links up your local repository to your remote repository.
+origin → Name of Remote
+master → Name of Branch </div></figure><pre id="1c6f7c0d-af9f-4838-9a78-7a0f68380b05" class="code"><code>git push -u origin master </code></pre><p id="ac7d4cd3-e9e7-4219-8e49-6d721c2aed01" class=""><code>master</code> branch is the main branch or the default branch of your repository. You can have more than one branch in a git repository.</p><p id="4b383d2f-be8a-4f5c-bd92-0d8ae1002b9d" class="">Once you execute the code above your local repository gets uploaded to your remote repository.</p><p id="de1f511a-7e5e-4ff7-a75f-cce66118473b" class="">And you can see all your files in the GitHub and you can see also all of your commit information.</p><h1 id="c22d7e3e-7e6f-4b77-9f31-29691fce730a" class="">Git Ignore</h1><p id="23b4c775-e94e-47e1-b1e7-4e31189cd800" class="">Sometimes we may want git to ignore some of our files. For example we might have a file that have our password and we don&#x27;t want them to get track by git and be in our remote repository. In order to that we can create a <code>gitignore</code> file. Another use of <code>gitignore</code> is for not tracking the DS_Store files. DS_Store refers to the files that relates to our customizations and preferences so other users don&#x27;t need to download it.</p><p id="d2fba797-5cb0-4060-a658-4e8abb5b0e30" class="">In order to create a <code>.gitignore</code> file, first navigate to your git repository </p><pre id="be7eb5d4-8af6-45ba-b884-923bec973531" class="code"><code>touch .gitignore</code></pre><p id="6227d890-7313-4996-bc9f-4400ea4d4323" class="">to verify that the <code>gitignore</code> file has been created you can command bellow and which shows all the files in your repository.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e3a7c7c5-521c-477c-a25c-678985820f69"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Note <code>.gitignore</code> file is a hidden file which mean you may not see it in the folder but command bellow will show hidden files as well.</div></figure><pre id="6aa413d8-8144-468c-b87f-917d4adbdde7" class="code"><code>ls -a</code></pre><p id="8eae128c-70f1-41ce-a09a-bc3b3847d543" class="">Now you open the <code>.gitignore</code> file and add the file you want to ignore file. You just write down file name. Use each line for only one file name.</p><p id="004e2e62-9ef4-4949-8d5d-93baf998c651" class="">Example: Let&#x27;s say that I have a file <code>sceretFile.text</code> which I have stored my website passwords on it and I don&#x27;t want this to be track by git and want to add it to my <code>.gitignore</code> file.</p><p id="039589ac-1dbf-4598-96ae-0c2b8d649a92" class="">I will add the link bellow to my <code>.gitignore</code> file.</p><pre id="6ed43ec0-eb11-4294-972b-6c867acea026" class="code"><code>sceretFile.text</code></pre><p id="8cd7a362-6cae-41ce-bb19-871fca7f8c0f" class="">If you want to comment in<code> .gitignore</code> file you use</p><pre id="11e467a0-9c47-4edc-a940-f0487b9c2655" class="code"><code>#</code></pre><p id="798cd32b-4882-480e-bd1a-68f199fd390d" class="">If you want git to ignore all files that have a certain file type</p><pre id="482aefb5-5435-4242-abec-fcb8a2e44339" class="code"><code>*.fileType
+
+#Example ignore all .text files
+*.text</code></pre><h1 id="f3412b52-4b8a-4740-9d54-eda9246e9bdd" class="">Cloning</h1><p id="8796b9cb-192e-448d-a374-9f8efbd5ae6b" class="">Using git we can clone a remote repository and pull it in to our machine. This process is called cloning. This will bring all the commits/all the versions of a remote repository to our working directory.</p><p id="aa34844c-8826-4288-8c80-c63a1601e9da" class="">First Find the project you are interested in cloning.</p><p id="a27c3028-ddc1-42ee-beef-c49668778dd8" class="">For Example I want to clone this project </p><figure id="9aab7d47-a0aa-40dc-aba1-3983cb46df08"><a href="https://github.com/google/material-design-lite" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">GitHub - google/material-design-lite: Material Design Components in HTML/CSS/JS</div><div class="bookmark-description">Material Design Components in HTML/CSS/JS. Contribute to google/material-design-lite development by creating an account on GitHub.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/google/material-design-lite</div></div><img src="https://opengraph.githubassets.com/37f78f77af1fe5f0c9e1e6c74c816a6255c42ca1051146bf36610fb08569ed4c/google/material-design-lite" class="bookmark-image"/></a></figure><p id="9b097dba-9cb2-4bf8-9601-b6cca8ade9ef" class="">In GitHub click on code and copy the <code>HTTPS</code> path, we are going to use this for cloning.</p><figure id="bb961532-9db0-4609-a1af-5e9767cedf15" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%202.png"><img style="width:568px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%202.png"/></a></figure><p id="fb23490c-1673-47a6-8c3b-f0654df8a26e" class="">Navigate to the directory which you want to <code>clone</code> this project and run the command bellow.</p><pre id="dcf8e317-c5be-4b9d-952a-c792eee9baf3" class="code"><code>git clone ProjectAdress
+
+
+//Example
+git clone https://github.com/google/material-design-lite.git</code></pre><p id="ff3bfcda-802a-4821-99e2-71519a75a67e" class="">Now if you navigate to the repository that you have cloned and run the command <code>git log</code> you can view commit history of the project.</p><h1 id="e76d12d1-2533-4402-a5b2-a21fa0d6b8e8" class="">Branching And Merging</h1><p id="58b81fd1-00b7-4821-b26c-251e0c66f4c6" class="">Git give us the ability to create branches we can also merge these branches together and it is very useful. Usually when you are developing an application you have a master/main branch and you also have experimental branch here you can test your new features and once they are ready you can marge the experimental branch to the master/main branch. In the meantime while you are working on experimental feature you can also work on your main branch and push updates to your application.</p><figure id="735474de-216f-4d5e-a6ee-79642254c9d5" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Git_Digram.drawio.png"><img style="width:403px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Git_Digram.drawio.png"/></a></figure><h2 id="5fbbd059-646e-443d-b9c1-3e4937214dad" class="">Creating New Branch</h2><p id="7d48b056-48d5-4d8a-881e-8cce1f0d06fc" class="">In order to create a new branch for your git repository, navigate to your git repository in command line and run the command bellow.</p><pre id="324a83b7-0aae-4e4e-a6e7-f6acdd87f085" class="code"><code>git branch branchName
+
+//example 
+//let&#x27;s say I want to create branch for my closing animation to test out
+git branch closing-animation</code></pre><h2 id="e41fbad8-1be9-4207-a5d1-62cc18badb61" class="">Check The Branches In Git Repository </h2><p id="93910ee0-598a-4cbf-bc4c-98f4d0ca4dc4" class="">In order to check the branches in git repository run the command bellow.</p><pre id="a7840556-c5ff-47c8-aed2-658aaff8a99c" class="code"><code>git branch</code></pre><p id="566cf926-e392-4329-8043-c91d0acbc89a" class="">This will show all the branches you have in your repository and your current branch that you are in. There will be a <code>asterisk *</code> next to the branch that you are on.</p><p id="549be596-98bc-4c82-a7f7-16cd1515aef5" class="">For example: I have two branches in my directory. One is master and the other one is called sad-ending. If run the command &quot;git branch&quot; I will see</p><figure id="b27d6bef-3ba4-4058-b687-72ec83d50fd1" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%203.png"><img style="width:642px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%203.png"/></a></figure><p id="ff3cd8d4-c948-413a-b4c5-6d58ad1df836" class="">The <code>*</code> next to master branch shows that right now I am in the master branch.</p><h2 id="983685f8-eb08-4719-9e8f-2c5504e23ab9" class="">Switch Branches</h2><p id="ce419d72-62bd-43f2-9d6b-9b9b21e4bd25" class="">If you want to change between branches in your repository you run the command bellow</p><pre id="98aacdde-0979-435a-9d02-8bfb4836ca75" class="code"><code>git checkout branchName
+
+//Example:
+//I want to go to a branch called sad-ending
+git checkout sad-ending</code></pre><p id="369e1c9f-59dc-4703-999e-e00c41bc4859" class="">After you run the command you can see that git has switch to the branch you have specified.</p><figure id="8b9b6b2f-279f-48eb-ba0d-9d6db6588d5b" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%204.png"><img style="width:676px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%204.png"/></a></figure><p id="fb05cac5-5036-4ee8-aa66-40b078e015a2" class="">Once you are in the new branch you have created you can make your change and the commit them link you normally would.</p><pre id="7c754046-cb6f-4bbc-8c00-6725acaa9223" class="code"><code>git add .
+git commit -m</code></pre><p id="b67cc8be-f5de-40ff-8a0c-f4aeb4773a9e" class="">You can also view the the commit history of each branch, one you are in the branch run the command <code>git log</code>.</p><p id="741aff84-6a07-45b2-9054-07b7a99c29e2" class="">You can also push this branch to your remote repository same way as before</p><pre id="fa46aa13-ba49-4db4-8fc4-76599cd191df" class="code"><code>git push -u origin branchName</code></pre><p id="639fbac3-12e1-42df-9a4f-a74c7d3e01d6" class="">Once you push the new branch to your remote git repository such as GitHub you can see it in your branch network.</p><h2 id="dba24caf-b694-471f-ae56-f4c15c12c160" class="">Merge Branches</h2><p id="e4c3c8e8-d89e-473f-8398-21baea03cb03" class="">You can merge your branches together. First you need to go to your base branch which usually is your master/main and then run the command bellow to merge another branch with your main branch. </p><pre id="5312250e-a19d-412c-b502-9475cfbb47c5" class="code"><code>git merge branchName
+
+//Example
+git merge sad-ending
+//This will merge branch sad-ending to my master branch</code></pre><p id="b60f7210-a13d-43c2-b563-57acb94c78c8" class="">Once you run above command, command line will take you to the Wim interface. In there you can write comment for the merge branch or you can just leave the default comment which is fine. In order to quite the Wim interface run the command bellow.</p><pre id="9d750c1b-aff7-4e1a-86df-699351ce48ce" class="code"><code>:q!</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cccc0e6b-dcbb-4b10-b931-bd4b27ef20b8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The default comment for branch merge is
+<code>Merge branch &#x27;mergedBranchName&#x27;</code></div></figure><p id="32f271b3-2a85-4edd-bba2-0ae151647228" class="">Now if you push this to your remote git repository such as GitHub you can see your branch network in there as well. Go to → Insights → Network</p><p id="ed119219-46d0-461f-b358-3154c0774d25" class="">Example:</p><p id="0e7c92cd-b080-4c5f-ac20-d3dfd406362c" class="">As you can I made a new branch and then merge it with my master branch.</p><figure id="d4d2d29b-2505-4eb0-a52d-475bc37b7a93" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%205.png"><img style="width:327px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%205.png"/></a></figure><p id="ab916c17-73b0-4338-9c7d-26e616c4ca2f" class="">You can do all of this in GitHub Website as well. You can create new branch and merge them together.</p><p id="c1c2b4f8-5687-4700-a6ab-a972a4d44aa0" class="">
+</p><h1 id="363572b6-b93b-4d42-9c97-bab367d92839" class="">Interactive Website To Learn Git Branching</h1><p id="8f87edde-cea2-4a6b-add6-b96c50a9e602" class="">This is a good website to practice your understanding of <code>git branch</code> concept.</p><figure id="487ddbb0-5c35-4a62-9c44-de0e18ded24c"><a href="https://learngitbranching.js.org/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Learn Git Branching</div><div class="bookmark-description">An interactive Git visualization tool to educate and challenge!</div></div><div class="bookmark-href">https://learngitbranching.js.org/</div></div><img src="https://pcottle.github.io/learnGitBranching/assets/learnGitBranching.png" class="bookmark-image"/></a></figure><h1 id="61ec6c94-1c80-4dbe-8aaa-8bee082ce68c" class="">Forking And Pull Requests</h1><p id="b0cd8257-29f9-461c-93fa-5e0abe0aa8b9" class="">So far we have focus on local and remote git repository and their functionally now we are going to cover git features that allows to collaborate with other.</p><p id="a696f91b-d4cb-4832-8d9f-2e8a7b4f0989" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5c8de177-9cb1-4178-b675-75858a464b53"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Ideally in a team, all the team member should have read and write access to the repository so they clone it and work on it and add their changes to remote repository.</div></figure><p id="271b2435-47ff-4003-8e53-9dd2b4a6a7ff" class="">
+</p><p id="4958aa38-21b9-452a-bafe-a219945b0833" class="">Now what if we don&#x27;t have write access to that repository so we are not part of the repository team. Users don&#x27;t have write access in public/private repository unless they are the owner of that repository or have been given special access by the owner. </p><p id="55d90764-ddd7-4541-a1f0-7f4b946fe739" class="">
+</p><p id="56408395-3330-4c49-8bf8-75b772aa5ffe" class="">In this case we are going to use <code>git fork</code> feature, first we fork that repository which means we make a copy of original repository in our own account and we can do whatever we want to it. </p><p id="b5e44058-5dc1-4b49-a3c6-b3dc61c24653" class="">
+</p><p id="8cd22355-1af8-48ea-a9bc-ba1603b85725" class="">Now we can <code>clone</code> the repository we just <code>forked</code> (copied) and clone it so we can work on it locally. </p><p id="95481ba1-4726-45c2-9bdf-9f6098a3eeb3" class="">
+</p><p id="a5061fe4-2037-47a7-957a-310b86d60d4f" class="">Once we added our changes we can push them to our repository (this would be the repository which we <code>forked</code>).</p><p id="afd1fb2c-6869-4f0c-9bb5-fc20e2264883" class="">
+</p><p id="bc2a4611-431f-4e58-a07b-aa8465341488" class="">If we want to notify the original owner of the repository about our changes we call use pull request to notify them and the reason it&#x27;s called pull request and not push request is because we are not the original owner of the repository so what we do here is that we notify the owner about our suggestion and ask them pull our <code>forked repository</code> to the <code>original repository</code>. This process is like making a suggestion to the original repository owner to add our changes to the original repository.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="57ec1595-9502-41a7-a5a7-1d5328046b08"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">This the work flow while working on open source project, even though they are open source that doesn&#x27;t mean anyone can just change the code. This would extremely bad!!
+
+If want to contribute to the project first you fork it (make a copy) → clone it to your local repository → push your changes → ask for a pull request from to the original repository 
+
+After that people who have write permission for the original repository can review your pull request. If they are happy with the changes you have added they can accept the pull request which would pull your repository to the original repository. If they are not happy with you changes they can reject it or they might give you comment to do some adjustment before pull request is accepted.</div></figure><p id="81440de0-e3c9-4f60-af51-87266bff6f12" class="">
+</p><figure id="fc8de482-b274-4657-92a3-c727533536ae" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Git_Digram.drawio_(3).png"><img style="width:613px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Git_Digram.drawio_(3).png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="aef15961-2f9c-4fb1-b7a9-629d35410c1f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">You can do all of these trough GitHub website. </div></figure><p id="381d5755-e327-4323-bfb8-459e217b5407" class="">You can also view the pull request history of open project.</p><p id="308c82c6-27ae-4a9f-aa71-524f70abba37" class="">Example:</p><p id="67d104dc-bade-40a2-a63e-142337b5403b" class="">Here you can view pull request that users made to Unity Open project. As you can see not all of them are huge changes but they are still helpful! So get out there and start contributing to some open source projects. 😁</p><figure id="c99d9867-9d30-4438-9765-46c46a2192b4"><a href="https://github.com/UnityTechnologies/open-project-1/pulls" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Pull requests · UnityTechnologies/open-project-1</div><div class="bookmark-description">You can&#x27;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/UnityTechnologies/open-project-1/pulls</div></div><img src="https://repository-images.githubusercontent.com/286490065/1fc17380-1e2f-11eb-8088-ea7a3b698215" class="bookmark-image"/></a></figure><h1 id="c5ff4a73-6698-454f-aeec-f8a59a4e0729" class="">Git Cheat Sheet </h1><figure id="5346441c-9dd4-4b3f-a3c9-d7f6cbe91be2" class="image"><a href="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%206.png"><img style="width:1454px" src="Learn%20Git%20d3e41d3748664b86ae6bce8685252048/Untitled%206.png"/></a></figure><p id="46c9be6b-acdb-4dc6-9ee4-2c73e32ab21c" class="">Made by <a href="https://www.atlassian.com/git">Atlassian</a></p><h1 id="02b28f35-a455-4725-919f-0a2ab78492a1" class="">Command Line Cheat Sheet</h1><p id="3613b6f3-3f55-4aae-b3ac-779058b86969" class="">These are list of useful command which help you get around command line easier 😉.</p><p id="3567d0d8-beef-4aa1-8fc1-90e641aa3c6f" class="">To open a directory</p><pre id="a7c1dbb0-372b-4a98-b3d3-8a9216cc692f" class="code"><code>cd directoryLocation</code></pre><p id="3c134409-d7ca-4f49-a8c6-b4855a5a151a" class="">
+</p><p id="1994f9b1-9a8c-4d9a-9a30-e36ed0054a97" class="">To go back to previous directory</p><pre id="f56afc36-7350-4cbb-b299-f8cb670ede44" class="code"><code>cd ..</code></pre><p id="b1e609ea-d4b4-472c-9414-8fb00ab7ab79" class="">
+</p><p id="172e04a9-82d0-4dc8-b514-7a0b22e3d8ae" class="">To make a directory(folder)</p><pre id="760faf31-91d8-42a7-8c55-d41987ff3eb7" class="code"><code>mkdire fileName</code></pre><p id="2e59fdc9-db86-4ed0-92ba-6cf7427a9322" class="">
+</p><p id="a197fcb5-653e-4831-929a-a97b6d4b77ae" class="">To create a file</p><pre id="2a185e4b-3229-4813-bc24-00d2facb0d09" class="code"><code>touch fileName.fileType</code></pre><p id="79d650e6-05ff-4c9a-8521-b9773d651cb7" class="">Example, I want to create a file called studentNames which is also a text file.</p><pre id="ddade059-1eaf-4b18-90de-30982d56c7cc" class="code"><code>rouch studenNames.text</code></pre><p id="c6af6052-2846-4547-8259-aa17450af392" class="">
+</p><p id="486f5318-f2dc-4ba9-a73f-159371f10386" class="">To open a file</p><p id="2c4ac059-f41c-41dd-8647-2ce449f14193" class="">On Mac</p><pre id="8bae6f3b-89d6-42a4-ba0e-62956c6765c9" class="code"><code>open fileName</code></pre><p id="e7971b67-75ce-448d-96e5-c56267acfbab" class="">On Windows </p><pre id="6ff23769-be09-4136-9e1c-3623189e38a9" class="code"><code>start fileName</code></pre><p id="01d20a09-3a23-43d4-a564-a9ec541cdbfa" class="">
+</p><p id="9d9d30eb-1e8b-4518-b9fe-03b3edfa3f28" class="">To open a file for coding (script files)</p><pre id="e2fcfef9-90dc-4df2-b869-431bb54051e9" class="code"><code>code fileName</code></pre><p id="003e28f7-8af6-494e-8428-12f4081c4a2c" class="">
+</p><p id="89b79ba7-502a-4c6b-9f50-2c5e009a0210" class="">To delete file</p><pre id="35d72b3a-2c6a-4725-b10f-cd4fb4970e67" class="code"><code>rm fileName</code></pre><p id="aaf109c6-01b9-45d6-aa64-f6b15ec78a69" class="">
+</p><p id="f4119e86-cf04-47a9-bbf9-931635c2ecd7" class="">To delete all the files in a directory</p><pre id="80c15ec8-939e-4afd-99c7-a77ed83fd288" class="code"><code>rm *</code></pre><p id="e76804e2-16e1-439b-b968-5eb6145ae505" class="">
+</p><p id="4e530360-8095-4c12-936a-31e202a275b5" class="">To delete a directory</p><pre id="b902ef63-0e22-46a7-9ade-f658da44e45c" class="code"><code>rm -r directoryName</code></pre><p id="4334cf75-907f-418b-a933-00be1042b116" class="">
+</p><p id="43fa5914-6a7d-42db-9e02-da3fb86e068a" class="">To view files in a directory </p><pre id="e525a30c-15fa-4932-b031-712ca974767d" class="code"><code>ls</code></pre><p id="b28bb97a-1a37-4580-8965-dfa8a8d703bc" class="">
+</p><p id="064d49e6-5b90-4cbd-b90c-526278bc9460" class="">To view all files in a directory (Includes hidden files)</p><pre id="89b8c891-afce-4de2-839e-f1bb5c2fd562" class="code"><code>ls -a</code></pre></div></article></body></html>
