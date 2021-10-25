@@ -1,0 +1,4 @@
+secretFile.text
+
+#Comment
+# *.text  -> Ignore all the files that have .text
